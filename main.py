@@ -512,3 +512,26 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.run()
+
+import asyncio
+import pygame
+
+
+async def main():
+  # Setup Pygame
+  pygame.init()
+  screen = pygame.display.set_mode((1280, 720))
+
+  running = True
+  while running:
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        running = False
+
+    # Draw/Update your game here
+
+    pygame.display.flip()
+    await asyncio.sleep(0)  # Mandatory for Pygbag
+
+
+asyncio.run(main())
