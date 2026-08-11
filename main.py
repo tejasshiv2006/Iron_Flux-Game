@@ -3,6 +3,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+import asyncio
 import pygame
 import random
 import math
@@ -419,7 +420,7 @@ class Game:
         else:
             self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-    def run(self):
+    async def run(self):
         while self.running:
             dt = min(self.clock.tick(60) / 1000.0, 0.1)
             
@@ -503,35 +504,16 @@ class Game:
                 self.draw_game_over(is_victory=(self.state == 'VICTORY'))
 
             pygame.display.flip()
+            await asyncio.sleep(0)  # Mandatory for Pygbag browser rendering
 
         self.gesture_ctrl.release()
         pygame.quit()
-        sys.exit()
-
-
-if __name__ == "__main__":
-    game = Game()
-    game.run()
-
-import asyncio
-import pygame
 
 
 async def main():
-  # Setup Pygame
-  pygame.init()
-  screen = pygame.display.set_mode((1280, 720))
-
-  running = True
-  while running:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        running = False
-
-    # Draw/Update your game here
-
-    pygame.display.flip()
-    await asyncio.sleep(0)  # Mandatory for Pygbag
+    game = Game()
+    await game.run()
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
