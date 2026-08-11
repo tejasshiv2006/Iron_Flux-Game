@@ -11,7 +11,7 @@
     async
     defer
 >
-python("""
+python(`
 Loading game from game.apk
     Pygbag Version : 0.9.3
     Template Version : 0.9.3
@@ -22,8 +22,6 @@ Loading game from game.apk
     Folder  : game
     Authors : pgw
     SPDX-License-Identifier: cookiecutter.spdx
-
-""")
 
 import sys
 import asyncio
@@ -158,8 +156,7 @@ asyncio.run(custom_site())
 # It separates Python code from HTML code.
 #
 # =============================================================================
-# --></script>
-
+    # -->`)</script>
 <head>
 
     <!-- =====================================================
